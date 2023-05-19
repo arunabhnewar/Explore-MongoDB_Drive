@@ -17,8 +17,6 @@ app.use('/post', postHandler);
 
 
 
-
-
 // client.db('mydb').collection('user').find().toArray((err, result) => {
 //     if (err) {
 //         console.log(err);
@@ -26,8 +24,6 @@ app.use('/post', postHandler);
 //         console.log(result);
 //     }
 // })
-
-
 
 
 

@@ -1,0 +1,31 @@
+// ObjectId
+// String
+// Array
+// Object
+// Boolean
+// Date
+// Double
+// null
+// Int32
+// Int64
+{
+    "_id": ObjectId("5a0f8f8f8f8f8f8f8f8f8f8"),
+    "name": "John",
+    "age": 30,
+    "cars": [
+        "Ford",
+        "BMW",
+        "Fiat"
+    ],
+    "address": {
+        "street": "Lenkergasse",
+        "city": "Graz",
+        "zip": 8010
+    },
+    "married": true,
+    "createdAt": ISODate("2014-01-01T00:00:00.000z"),
+    "hobbies": null,
+    "double": 1.23456789,
+    "int32": NumberInt(0),
+    "int64": NumberLong(0)
+}
