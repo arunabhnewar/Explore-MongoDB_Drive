@@ -32,3 +32,65 @@ db.collection.find( { qty: { $gt: value }})
 
 $gte = { field: { $gte: value }}
 db.collection.find( { qty: { $gte: value }})
+
+$lt = { field: { $lt: value }}
+db.collection.find({ qty: { $lt: value }})
+
+$lte = { field: { $lte: value }}
+db.collection.find({ qty: { $lte: value }})
+
+$in = { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
+db.collection.find( { quantity: { $in: [ 5, 15 ] } }, { _id: 0 } )
+db.inventory.updateMany({ tags: { $in: [ "home", "school" ] } }, { $set: { exclude: false } })
+
+$ne = { field: { $ne: value } }
+db.collection.find( { quantity: { $ne: 20 } } )
+
+
+
+#Element Query Operators
+$exists = { field: { $exists: <boolean> } }
+db.collection.find({quantity: { $exists: true, $in: [5, 350] }})
+db.collection.find({quantity: { $exists: false }})
+
+$type = { field: { $type: <BSON type> } }
+db.collection.find({ age: { $type: "int" } })
+
+
+#Here are some commonly used data types and their corresponding values for the $type operator
+1 or "double": Double (64-bit floating-point number)
+
+2 or "string": String
+
+3 or "object": Object (e.g., embedded document)
+
+4 or "array": Array
+
+8 or "boolean": Boolean
+
+9 or "date": Date
+
+16 or "int": 32-bit integer
+
+18 or "long": 64-bit integer
+
+19 or "decimal": Decimal128
+
+26 or "javascript": JavaScript code
+
+27 or "symbol": Symbol
+
+32 or "timestamp": Timestamp
+
+64 or "minkey": MinKey
+
+127 or "maxkey": MaxKey
+
+
+
+#Evaluation Query Operators
+$regex = 
+{ <field>: { $regex: /pattern/, $options: '<options>' } }
+{ <field>: { $regex: 'pattern', $options: '<options>' } }
+{ <field>: { $regex: /pattern/<options> } }
+db.collection.find({ name: { $regex: /(?i)a(?-i)cme/} })
