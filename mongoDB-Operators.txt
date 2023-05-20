@@ -1,0 +1,34 @@
+#MongoDb Operators
+
+#Logical operators
+$and = { $and: [ { <expression1> }, { <expression2> } , ... , { <expressionN> } ] }
+db.collection.find( { $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } } ] } )
+
+$or = { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
+db.collection.find( { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } )
+
+$not = { $not: [ { <expression1> }, { <expression2} ] }
+db.collection.find({age: {$not: {$gt: 2}}})
+
+$nor = { $nor: [ { <expression1> }, { <expression2> }, ...  { <expressionN> } ] }
+db.collection.find({$nor: [{name: ""}, {age: {$gt: ""}}]})
+
+
+
+#Array Query Operators
+$all = { <field>: { $all: [ <value1> , <value2> ... ] } }
+db.collection.find( { tags: { $all: [ [ "ssl", "security" ] ] } } )
+
+$size = db.collection.find( { field: { $size: 2 } } );
+
+
+
+#Comparison Query Operators
+$eq = { <field>: { $eq: <value> } }
+db.collection.find( { qty: { $eq: 20 } } )
+
+$gt = { field: { $gt: value } }
+db.collection.find( { qty: { $gt: value }})
+
+$gte = { field: { $gte: value }}
+db.collection.find( { qty: { $gte: value }})

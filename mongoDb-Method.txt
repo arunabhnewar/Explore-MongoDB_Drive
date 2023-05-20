@@ -1,0 +1,29 @@
+#MongoDb method
+
+db.createCollection("collection-name"),       // Create a single collection in a database
+db.getCollection("collection-name"),
+db.getCollection("collection-name").find(),
+db.collection-name.find(),
+db.collection-name.drop(),                  // Delete single collection in a database
+db.dropDatabase(),                          // Delete a database 
+
+
+db.collection.insertOne(document)
+db.collection.insertMany(documents)
+db.collection.find(query, projection)
+db.collection.findOne(query, projection)
+db.collection.updateOne(filter, update, options)
+db.collection.updateMany(filter, update, options)
+db.collection.deleteOne(filter)
+db.collection.deleteMany(filter)
+db.collection.aggregate(pipeline)
+db.collection.createIndex(keys, options)
+db.collection.dropIndex(index)
+db.collection.count(query, options)
+db.collection.countDocuments(query, options)
+db.collection.distinct(field, query)
+
+
+db.collection.find().limit()
+db.collection.find().sort( {  } )
+db.collection.find().forEach(<function>)
