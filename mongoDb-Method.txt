@@ -27,3 +27,4 @@ db.collection.distinct(field, query)
 db.collection.find().limit()
 db.collection.find().sort( {  } )
 db.collection.find().forEach(<function>)
+

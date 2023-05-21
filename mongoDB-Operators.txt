@@ -1,4 +1,5 @@
 #MongoDb Operators
+#Query and Projection Operators
 
 #Logical operators
 $and = { $and: [ { <expression1> }, { <expression2> } , ... , { <expressionN> } ] }
@@ -94,3 +95,43 @@ $regex =
 { <field>: { $regex: 'pattern', $options: '<options>' } }
 { <field>: { $regex: /pattern/<options> } }
 db.collection.find({ name: { $regex: /(?i)a(?-i)cme/} })
+
+=====================XXXX================================
+
+#Update Operators
+
+#Field Update Operators
+$set = { $set: { <field1>: <value1>, ... } }
+db.collection.updateOne({ _id: ObjectId("id") }, { $set:  {field1: value1, field2: value2}})
+db.collection.updateMany({}, { $set: {field1: value1, field2: value2} }, {multi: true})
+
+$unset = { $unset: { <field1>: "", ... } }
+db.collection.updateOne({ _id: ObjectId("id") }, {$unset: {field1: "", field2: ""}})
+db.collection.updateMany({}, {$unset: {field1: "", field2: ""}})
+
+$rename = {$rename: { <field1>: <newName1>, <field2>: <newName2>, ... } }
+db.collection.updateOne({}, {$rename: {field1: newName1, field2: newName2}})
+db.collection.updateOne({_id: ObjectId("id")}, {$rename: {field1: newName1, field2: newName2}})
+db.collection.updateMany({}, {$rename: {field1: newName1, field2: newName2}})
+
+$inc = { $inc: { <field1>: <amount1>, <field2>: <amount2>, ... } }
+db.collection.updateOne({_id: ObjectId("id")}, {$inc: {<field1>: <amount1>, <field2>: <amount2>}})
+db.collection.updateMany({}, {$inc: {<field1>: <amount1>, <field2>: <amount2>}})
+
+
+$mul = { $mul: { <field1>: <number1>, ... } }
+db.collection.updateOne({_id: ObjectId("id")}, {$mul: {<field1>: <multiplyNumber>}})
+db.collection.updateMany({}, {$mul: {<field1>: <multiplyNumber>}})
+
+$currentDate = { $currentDate: { <field1>: <booloan>, ... } }
+db.collection.updateOne({_id: ObjectId("id")}, {$currentDate: {<field1>: boolean}})
+
+$min = { $min: { <field1>: <value1>, ... } }
+db.collection.updateOne({_id: ObjectId("id")}, {$min: {<field1>: <value1>}})
+
+$max = { $max: { <field1>: <value1>, ... } }
+db.collection.updateOne({_id: ObjectId("id")}, {$max: {<field1>: <value1>}})
+
+
+
+#Array Update Operators
