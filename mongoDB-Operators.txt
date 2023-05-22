@@ -22,30 +22,33 @@ db.collection.find( { tags: { $all: [ [ "ssl", "security" ] ] } } )
 
 $size = db.collection.find( { field: { $size: 2 } } );
 
+$elemMatch = { <field>: { $elemMatch: { <query1>, <query2>, ... } } }
+db.collection.find({field: { $elemMatch: { $gte: value, $lte: value}}})
+db.collection.find({field: { $elemMatch: {field1: value1, field2: { $gte: value, $lte: value}}}})
 
 
 #Comparison Query Operators
 $eq = { <field>: { $eq: <value> } }
-db.collection.find( { qty: { $eq: 20 } } )
+db.collection.find( { <field>: { $eq: 20 } } )
 
 $gt = { field: { $gt: value } }
-db.collection.find( { qty: { $gt: value }})
+db.collection.find( { <field>: { $gt: value }})
 
 $gte = { field: { $gte: value }}
-db.collection.find( { qty: { $gte: value }})
+db.collection.find( { <field>: { $gte: value }})
 
 $lt = { field: { $lt: value }}
-db.collection.find({ qty: { $lt: value }})
+db.collection.find({ <field>: { $lt: value }})
 
 $lte = { field: { $lte: value }}
-db.collection.find({ qty: { $lte: value }})
+db.collection.find({ <field>: { $lte: value }})
 
 $in = { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
-db.collection.find( { quantity: { $in: [ 5, 15 ] } }, { _id: 0 } )
-db.inventory.updateMany({ tags: { $in: [ "home", "school" ] } }, { $set: { exclude: false } })
+db.collection.find( { <field>: { $in: [ <value1>, <value2> ] } } )
+db.inventory.updateMany({ <field>: { $in: [ <value1>, <value2> ] } }, { $set: { <field2>: boolean } })
 
 $ne = { field: { $ne: value } }
-db.collection.find( { quantity: { $ne: 20 } } )
+db.collection.find( { field: { $ne: value} } )
 
 
 
@@ -96,6 +99,7 @@ $regex =
 { <field>: { $regex: /pattern/<options> } }
 db.collection.find({ name: { $regex: /(?i)a(?-i)cme/} })
 
+
 =====================XXXX================================
 
 #Update Operators
@@ -135,3 +139,30 @@ db.collection.updateOne({_id: ObjectId("id")}, {$max: {<field1>: <value1>}})
 
 
 #Array Update Operators
+$push = { $push: { <field1>: <value1>, ... } }
+db.collection.updateOne({_id: ObjectId("id")}, {$push: {<field1>: <value1>}})
+db.collection.updateMany({}, {$push: {<field1>: <value1>}})
+
+$pop = { $pop: { <field>: < -1 | 1>, ... } }
+db.collection.updateOne({_id: ObjectId("id")}, {$pop: {<field>:  -1 }})
+db.collection.updateOne({_id: ObjectId("id")}, {$pop: {<field>:  1 }})
+
+$pull = { $pull: { <field1>: <value|condition>, <field2>: <value|condition>, ... } }
+db.collection.updateMany({}, {$pull: {<field1>: {}}})
+
+$addToSet = { $addToSet: { <field1>: <value1>, ... } }
+db.collection.updateMany({}, {$addToSet: {<field1>: value1}})
+db.collection.updateOne({_id: ObjectId("id")}, {$addToSet: {<field1>: [value1, value2]}})
+
+$each = { $addToSet: { <field>: { $each: [ <value1>, <value2> ... ] } } }
+{ $push: { <field>: { $each: [ <value1>, <value2> ... ] } } }
+db.collection.updateOne({_id: ObjectId("id")}, {$push: {<field1>: {$each: [ <value1>, <value2> ...]}}})
+db.collection.updateMany({}, {$addToSet: {<field>: {$each: [ <value1>, <value2> ... ]}}})
+
+$slice = { $push: {<field>: {$each: [ <value1>, <value2>, ... ],$slice: <num>}}}
+db.collection.updateOne({_id: ObjectId("id")}, {$push: {<field1>: {$each: [ <value1>, <value2>, ...], $slice: < -num>}}})
+db.collection.updateOne({_id: ObjectId("id")}, {$push: {<field1>: {$each: [ <value1>, <value2>, ...], $slice: < num>}}})
+
+$sort = {$push: {<field>: {$each: [ <value1>, <value2>, ... ],$sort: <sort specification>}}}
+db.collection.updateOne({_id: ObjectId("id")}, {$push: {<field1>: {$each: [], $sort: -1}}})
+db.collection.updateOne({_id: ObjectId("id")}, {$push: {<field>: {$each: [{<field1>: <value1>}, {<field2>: <value2> }, ...], $sort: {field1: 1}}}})

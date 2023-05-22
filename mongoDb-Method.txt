@@ -27,4 +27,15 @@ db.collection.distinct(field, query)
 db.collection.find().limit()
 db.collection.find().sort( {  } )
 db.collection.find().forEach(<function>)
+db.collection.findAndModify(document)
+db.collection.findOne(query, projection, options)
+db.collection.findOneAndDelete( filter, options )
+db.collection.findOneAndReplace( filter, replacement, options )
+db.collection.findOneAndUpdate( filter, update, options )
 
+
+db.collection.replaceOne(filter, replacement, options)
+
+
+db.collection.deleteOne(filter, options )
+db.collection.deleteMany(filter)
